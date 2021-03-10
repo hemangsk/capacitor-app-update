@@ -14,10 +14,11 @@ public class AppUpdate: CAPPlugin {
         DispatchQueue.global().async {
             do {
                 guard
+                    let countryCode = call.getString("lookupCountryCode", ""),
                     let info = Bundle.main.infoDictionary,
                     let bundleId = info["CFBundleIdentifier"] as? String,
                     let currentVersion = info["CFBundleShortVersionString"] as? String,
-                    let lookupUrl = URL(string: "https://itunes.apple.com/lookup?bundleId=\(bundleId)")
+                    let lookupUrl = URL(string:  "https://itunes.apple.com/lookup?bundleId=\(bundleId)&country=\(countryCode)")
                 else {
                     call.reject("Invalid bundle info provided")
                     return
@@ -53,9 +54,10 @@ public class AppUpdate: CAPPlugin {
         DispatchQueue.global().async {
             do {
                 guard
+                    let countryCode = call.getString("lookupCountryCode", ""),
                     let info = Bundle.main.infoDictionary,
                     let bundleId = info["CFBundleIdentifier"] as? String,
-                    let lookupUrl = URL(string: "https://itunes.apple.com/lookup?bundleId=\(bundleId)")
+                    let lookupUrl = URL(string:  "https://itunes.apple.com/lookup?bundleId=\(bundleId )&country=\(countryCode)")
                 else {
                     call.reject("Invalid bundle info provided")
                     return
